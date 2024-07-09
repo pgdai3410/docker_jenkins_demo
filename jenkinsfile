@@ -42,7 +42,7 @@ pipeline {
                     try{
                         withCredentials([usernamePassword(credentialsId: 'my-docker-hub-credentials-id',usernameVariable: 'pgdai3410', passwordVariable: 'dckr_pat_T3vK7ZNrWez8JcMZzqPLTEWWdyw')]){
                             docker.withRegistry('https://index.docker.io/v1/'){
-                                docker.image(DOCKER_IMAGE_NAME).push(IMAGE_TAG)
+                                sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io" docker.image(DOCKER_IMAGE_NAME).push(IMAGE_TAG)
                             }
                         }
                         
